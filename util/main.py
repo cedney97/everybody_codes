@@ -22,3 +22,27 @@ def print_grid(grid: list[list[Any]]):
         for col in row:
             row_str += str(col).rjust(longest) + " "
         print(row_str)
+
+def transpose_grid(rows, num_times=1):
+
+    def _transpose_once(rows):
+        if not rows:
+            return []
+
+        max_len = max(len(r) for r in rows)
+        result = []
+
+        for i in range(max_len):
+            col = [r[i] for r in rows if i < len(r)]
+            result.append(col)
+
+        return result
+
+    if num_times <= 0:
+        return rows
+
+    result = rows
+    for _ in range(num_times):
+        result = _transpose_once(result)
+
+    return result
